@@ -1,0 +1,710 @@
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Be Vietnam Pro", Sans-Serif;
+    scroll-behavior: smooth;
+}
+    #wrapper{
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .container{
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+    }
+    .logo{
+        width: 80px;
+    }
+    .text-container{
+        display: flex;
+        align-items: center;
+        justify-content: baseline;
+    }
+    .nav-items{
+        display: flex;
+        gap: 2rem;
+        padding: 0 4em;
+    }
+    .logo-text{
+        margin-left: -1.2rem;
+        font-size: 28px;
+    }
+    .nav-items div{
+        font-size: 20px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .nav-items div a{
+        color: black;
+    }
+    a{
+        text-decoration: none;
+    }
+    .nav-items div:hover{
+        transition: 0.8s;
+        font-weight: bold;
+    }
+    .hero-section{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        margin: 4rem auto;
+        padding: 0 1rem;
+        gap: 5rem;
+        padding-bottom: 8rem;
+    }
+    .faded-text{
+        position: absolute; /*bottom aur left jo niche likhe hain na uske karan niche chl ja rha */
+        user-select: none;
+        font-size: 7em;
+        color: rgb(231,231,231);
+        bottom: -16%;
+        left: -5%;
+        font-weight: bold;
+        transition: all 3s;
+    }
+    .hero-section-left{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .hero-section-heading{
+        font-size: 35px;
+        color: #343d60;
+        font-weight: 500;
+    }
+    .role{
+        color: #4e45d5;
+        font-weight: 800;
+    }
+    .hero-section-sub-heading{
+        font-size: 45px;
+        line-height: 45px;
+    }
+    .hero-section-description{
+        margin-top: 1rem;
+        width: 70%;
+        font-weight: 500;
+    }
+    .button-pink{
+        background-color: #e84949;
+        padding: 0.8rem 2.3rem;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        width: fit-content;
+        box-shadow: 5px 5px 7px 0px #0000003f;
+        cursor: pointer;
+        border: solid 3px transparent;
+        transition: all 0.5s;
+        position: relative;
+        z-index: 1;
+    }
+    .button-pink::before{
+        content: "";
+        background-color: #fff;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        position: absolute;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all 0.8s;
+        z-index: -1;
+    }
+    .button-pink:hover::before{
+        transform: scaleX(1);
+    }
+    .button-pink:hover{
+        border: solid 3px var(--bgOrange);
+        color: black;
+    }
+    .hero-section-right{
+        position: relative;
+    }
+    .absolute{
+        position: absolute;
+    }
+    .user-image{
+        z-index: -9;
+        padding: 2.5rem;
+        filter: grayscale(1);
+        transition: all 1s;
+        animation: scaleImage 5s linear infinite;
+    }
+    @keyframes scaleImage{
+        0%{
+            filter: grayscale(0);
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.1);
+            filter: grayscale(1);
+            box-shadow: 3px 3px 10px black;
+        }
+        100%{
+            filter: grayscale(0);
+            transform: scale(1);
+        }
+    }
+    .icon-dots{
+        z-index: 9;
+        bottom: -1rem;
+        right: 0;
+        animation-name: dotsAnimation;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+    }
+    @keyframes dotsAnimation{
+        0%{
+           transform: translateY(0px); 
+        }
+        50%{
+            transform: translateY(-15px);
+        }
+        100%{
+            transform: translateY(0px);
+        }
+    }
+    .icon-cube{
+        z-index: 9;
+        top: -0.8em;
+        right: 1em;
+        animation-name: cubeRotate;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+    }
+    @keyframes cubeRotate{
+        0%{
+          transform: translateY(0px) rotateY(0deg);  
+        }
+        50%{
+          transform: translateY(-12px) rotateY(180deg); 
+        }
+        100%{
+          transform: translateY(0px) rotateY(360deg);
+        }
+    }
+    .icon-circle{
+        z-index: 9;
+        left: 0;
+        bottom: 0;
+        animation-name: shakeEffect;
+        animation-duration: 6s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+    @keyframes shakeEffect {
+        0%{
+            left: 0;
+            bottom: 0;
+        }
+        50%{
+            left: 5%;
+            bottom: 10%;
+        }
+        100%{
+            left: 0;
+            bottom: 0;
+        }
+    }
+    .icon-zigzag{
+        z-index: 9;
+        top: 1.5em;
+        left: -0.3em;
+        animation: zigzagAnimation 5s ease-in infinite;
+    }
+    @keyframes zigzagAnimation{
+        50%{
+            top: 2%;
+            left: 5%;
+        }
+    }
+    .icon-plus{
+        z-index: 9;
+        top: -0.8rem;
+        left: 50%;
+        animation: shakeEffectPlus 5s ease-in infinite;
+    }
+    @keyframes shakeEffectPlus{
+        50%{
+            top: 3%;
+            left: 48%;
+        }
+    }
+    .project-section{
+        background-color: rgb(231,231,231);
+        margin-top: 4rem;
+    }
+    .page-header{
+        color: #ff0000;
+        font-size: 90px;
+        text-align: center;
+        padding-top: 30px;
+    }
+    .project-container{
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 3rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 120px;
+    }
+    .project-card{
+        width: 85%;
+        height: 550px;
+        left: 5%;
+        background-image: url("https://code-help-porfolio-website.netlify.app/images/projects/Project1.png");
+        background-size: cover;
+        background-repeat: no-repeat; 
+        position: relative;
+        box-shadow: 0px 0px 40px #1f1f1f;
+    }
+    .project-card::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #1f1f1f9a;
+    }
+    .project-card::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, #343d68, #343d68be, #343d687c);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all 0.4s;
+    }
+    .project-card:hover::before{
+        transform: scaleX(1);
+        
+    }
+    .project-number{
+        position: absolute;
+        font-size: 200px;
+        font-weight: 600;
+        color: white;
+        z-index: 10;
+        opacity: 0;
+    }
+    .project-container:hover .project-number{
+        opacity: 1;
+    }
+    .project-number-right{
+        right: -40px;
+        top: -45px;
+    }
+     .project-number-left{
+        right: -40px;
+        top: -45px;
+    }
+    .project-content{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        padding: 2em;
+        bottom: 20%;
+        z-index: 5;
+        gap: 1em;
+        transition: all 0.4s;
+    }
+    .project-content-left{
+        left: 10%;
+    }
+    .project-skills-container{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .project-skill{
+        width: 40px;
+    }
+    .project-heading{
+        font-size: 50px;
+        font-weight: bold;
+        line-height: 3rem;
+    }
+    .project-sub-heading{
+        width: 70%;
+        font-size: 16px;
+        font-style: italic;
+    }
+    .btn-grp{
+        display: flex;
+        gap: 0.9rem;
+        align-items: center;
+    }
+    .btn-project:hover{
+        border: none;
+    }
+    .icon{
+        cursor: pointer;
+        color: white;
+        font-size: 35px;
+    }
+    .icon:hover{
+        color: #ff0000;
+    }
+    .project-card:hover .project-content{
+        transform: scale(1.1);
+    }
+    #project1{
+        background-image: url("https://code-help-porfolio-website.netlify.app/images/projects/Project1.png");
+    }
+    #project2{
+        margin-left: 80px;
+        background-image: url("https://code-help-porfolio-website.netlify.app/images/projects/Project2.png");
+    }
+    #project3{
+        background-image: url("https://code-help-porfolio-website.netlify.app/images/projects/Project3.png");
+        margin-top: 120px;
+    }
+    #project4{
+        margin-top: 120px;
+        margin-left: 80px;
+        background-image: url("https://code-help-porfolio-website.netlify.app/images/projects/Project4.png");
+    }
+    .contact-wrapper{
+    width: 100%;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.07);
+    padding: 8rem 0;
+    }
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Be Vietnam Pro";
+    scroll-behavior: smooth;
+    }
+  
+   :root{
+    --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+   }
+   :root{
+    --button-color: rgb(252, 81, 81);
+    --button-border: #ff0000;
+    --black: #000;
+    --white: #fff;
+   }
+   .fa-paper-plane:before{
+    content: "\f1d8";
+   }
+   .contact-input-form {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-left: 17rem;
+    position: relative;
+    left: 15%;
+}
+button {
+    border: 1.3px solid var(--button-color);
+    background-color: var(--button-color);
+    color: #fff;
+    padding: .5rem 1.5rem;
+    font-size: .9rem;
+    box-shadow: 0.3rem 0.3rem 5px rgb(172, 172, 172);
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    cursor: pointer;
+}
+.contact-heading > p {
+    font-size: 3rem;
+    color: rgb(131, 130, 130);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Be Vietnam Pro";
+    scroll-behavior: smooth;
+}
+p {
+    display: block;
+    
+}
+contact-heading > h1 {
+    font-size: 7rem;
+    color: var(--button-border);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Be Vietnam Pro";
+    scroll-behavior: smooth;
+}
+h1 {
+    display: block;
+    font-size: 6em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    color: red;
+}
+    
+</style>
+
+<html>
+<body>
+<div id="wrapper">
+    <div class="container">
+        <div class="navbar">
+            <div class="text-container">
+                <img src="data:image/png;base64,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" alt="" class="logo">
+                <div class="logo-text">ohn Doe</div>
+                </div>
+            <div class="nav-items">
+                <div><a href="#projects">Projects</a></div>
+                <div><a href="#contacts">Contact Us</a></div>
+                <div><a href="#skills">Skills</a></div>
+            </div>
+        </div>
+        <div class="hero-section">
+            <div class="hero-section-left">
+                <div class="hero-section-heading">Hii!! John Doe</div>
+                <div class="hero-section-heading hero-section-sub-heading">I am a <span class="role"></span></div>
+                <div class="hero-section-description">I’m a software developer and here is my portfolio website. Here
+                you’ll learn about my journey as a software developer.</div>
+                <button class="button-pink" id="button">Hire Me</button>
+            </div>
+            <div class="hero-section-right">
+                <div class="absolute icons icon-dots">
+                    <img src="https://code-help-porfolio-website.netlify.app/images/userAsset/dots.png" alt=""/>
+                </div>
+                <div class="absolute icons icon-cube">
+                    <img src="https://code-help-porfolio-website.netlify.app/images/userAsset/cube.png" alt=""/>
+                </div>
+                <div class="absolute icons icon-circle">
+                    <img src="https://code-help-porfolio-website.netlify.app/images/userAsset/circle.png" alt=""/>
+                </div>
+                <div class="absolute icons icon-zigzag">
+                    <img src="https://code-help-porfolio-website.netlify.app/images/userAsset/zigzags.png" alt=""/>
+                </div>
+                <div class="absolute icons icon-plus">
+                    <img src="https://code-help-porfolio-website.netlify.app/images/userAsset/plus.png" alt=""/>
+                </div>
+                <div class="user-image">
+                    <img src="data:image/jpeg;base64,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" alt=""/>
+                </div>
+            </div>
+            <div class="faded-text">John Doe</div>
+            
+        </div>
+    </div>
+    <div class="project-section">
+        <h2 class="page-header">Projects</h2>
+        <div class="project-container">
+            <div class="project-card" id="project1">
+                <div class="project-number project-number-right"></div>
+                <div class="project-content project-content-left">
+                    <div class="project-skills-container">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Javascript.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Express.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NextJsCircle.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Tailwind.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NodeJs.svg
+" alt="">
+                        <img class="project-skill" src="	https://code-help-porfolio-website.netlify.app/images/stack/MongoDB.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Typescript.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Bootstrap.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                    </div>
+                    <h2 class="project-heading">Tint & Orange</h2>
+                    <div class="project-sub-heading">It is a car modification company which provide you sheets to protect your car from scratch</div>
+                    <div class="btn-grp">
+                        <button class="button-pink btn-project">Read More</button>
+                        <a href="">
+                            <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+                        </a>
+                        <a href="Live Link" class="fa-solid fa-link icon"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" id="project2">
+                <div class="project-number project-number-left"></div>
+                <div class="project-content project-content-left">
+                    <div class="project-skills-container">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Javascript.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Express.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NextJsCircle.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Tailwind.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NodeJs.svg
+" alt="">
+                        <img class="project-skill" src="	https://code-help-porfolio-website.netlify.app/images/stack/MongoDB.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Typescript.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Bootstrap.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                    </div>
+                    <h2 class="project-heading">Tint & Orange</h2>
+                    <div class="project-sub-heading">It is a car modification company which provide you sheets to protect your car from scratch</div>
+                    <div class="btn-grp">
+                        <button class="button-pink btn-project">Read More</button>
+                        <a href="">
+                            <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+                        </a>
+                        <a href="Live Link" class="fa-solid fa-link icon"></a>
+                    </div>
+                </div>
+                </div>
+        </div>
+        <div class="project-card" id="project3">
+            <div class="project-number project-number-right">03</div>
+                <div class="project-content project-content-left">
+                    <div class="project-skills-container">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Javascript.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Express.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NextJsCircle.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Tailwind.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NodeJs.svg
+" alt="">
+                        <img class="project-skill" src="	https://code-help-porfolio-website.netlify.app/images/stack/MongoDB.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Typescript.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Bootstrap.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                    </div>
+                    <h2 class="project-heading">Tint & Orange</h2>
+                    <div class="project-sub-heading">It is a car modification company which provide you sheets to protect your car from scratch</div>
+                    <div class="btn-grp">
+                        <button class="button-pink btn-project">Read More</button>
+                        <a href="">
+                            <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+                        </a>
+                        <a href="Live Link" class="fa-solid fa-link icon"></a>
+                    </div>
+                </div>
+                </div>
+        <div class="project-card" id="project4">
+            <div class="project-number project-number-left">04</div>
+                <div class="project-content project-content-left">
+                    <div class="project-skills-container">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Javascript.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Express.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NextJsCircle.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Tailwind.png
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/NodeJs.svg
+" alt="">
+                        <img class="project-skill" src="	https://code-help-porfolio-website.netlify.app/images/stack/MongoDB.svg
+" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Typescript.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/Bootstrap.svg" alt="">
+                        <img class="project-skill" src="https://code-help-porfolio-website.netlify.app/images/stack/HTML.png" alt="">
+                    </div>
+                    <h2 class="project-heading">Tint & Orange</h2>
+                    <div class="project-sub-heading">It is a car modification company which provide you sheets to protect your car from scratch</div>
+                    <div class="btn-grp">
+                        <button class="button-pink btn-project">Read More</button>
+                        <a href="">
+                            <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+                        </a>
+                        <a href="Live Link" class="fa-solid fa-link icon"></a>
+                    </div>
+                </div>
+                </div>
+    </div>
+</div>
+<div class="contact-wrapper">
+        <div id="contact">
+          <div class="contact-heading">
+            <h1>Contact Me</h1>
+            <p>Questions, Thoughts, Or Just Want To Say Hello?</p>
+          </div>
+
+          <div class="contact-input-form">
+            <label for="input-name"></label>
+            <input id="input-name" type="text" placeholder="Enter your name">
+
+            <label for="input-email"></label>
+            <input id="input-email" type="text" placeholder="Enter your email address">
+
+            <label for="input-subject"></label>
+            <input id="input-subject" type="text" placeholder="Enter your subject">
+            <label for="message-area"></label>
+            <textarea name="" id="message-area" cols="30" rows="10" placeholder="Enter your message"></textarea>
+            <button class="contact-me-button">
+              Send Message <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            </div>
+            </div>
+            </div>
+            
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://kit.fontawesome.com/58a810656e.js" crossorigin="anonymous"></script>
+<script>
+    
+      var typeData = new Typed(".role", {
+        strings: [
+          "Full Stack Developer",
+          "Web Developer",
+          "UI-UX Designer",
+          "Backend Developer",
+          "Coder",
+        ],
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 80,
+        backDelay: 1000,
+      });
+    
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
